@@ -1,0 +1,6 @@
+Flask
+PyMuPDF
+qrcode
+Pillow
+num2words
+gunicorn

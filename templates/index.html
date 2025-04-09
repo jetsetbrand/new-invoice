@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Web Auto Invoice</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="app-container">
+    <header>
+      <img src="{{ url_for('static', filename='web_auto_logo.png') }}" alt="Web Auto Logo">
+      <h1>Web Auto</h1>
+    
+      <p class="form-instructions">
+        🔹 Please fill in all necessary invoice details carefully. <br>
+        🔹 Fields like Remove Reflecting, Denting, Painting can be left blank if not applicable. <br>
+        🔹 Click <strong>"Add More"</strong> to add additional item rows. <br>
+        🔹 Ensure GST No. and Bill No. are accurate — they’ll appear in the QR code. <br>
+        🔹 Once done, click <strong>Generate Invoice</strong> to preview and download the PDF.
+      </p>
+      
+    
+    </header>
+
+    <form action="/generate" method="post" class="invoice-form">
+      <input type="text" name="name" placeholder="Customer Name" required>
+      <input type="text" name="address" placeholder="Address" required>
+      <input type="text" name="bill_no" placeholder="Bill No" required>
+      <input type="date" name="bill_date" required>
+      <input type="text" name="gst" placeholder="GST No" required>
+      <input type="text" name="v_no" placeholder="Vehicle No" required>
+
+      <input type="text" name="remove_reflecting" placeholder="Remove Reflecting">
+      <input type="text" name="denting" placeholder="Denting">
+      <input type="text" name="painting" placeholder="Painting">
+
+      <div id="items">
+        <div class="item-row">
+          <input name="detail1" placeholder="Detail">
+          <input name="hsn1" placeholder="HSN">
+          <input name="gst_rate1" placeholder="GST Rate">
+          <input name="qty1" placeholder="Qty">
+        </div>
+      </div>
+      <button type="button" onclick="addItem()">Add More</button>
+      <button type="submit" class="submit-btn">Generate Invoice</button>
+    </form>
+  </div>
+
+  <script>
+    let count = 2;
+    function addItem() {
+      const items = document.getElementById('items');
+      const div = document.createElement('div');
+      div.className = "item-row";
+      div.innerHTML = `
+        <input name="detail${count}" placeholder="Detail">
+        <input name="hsn${count}" placeholder="HSN">
+        <input name="gst_rate${count}" placeholder="GST Rate">
+        <input name="qty${count}" placeholder="Qty">
+      `;
+      items.appendChild(div);
+      count++;
+    }
+  </script>
+</body>
+</html>

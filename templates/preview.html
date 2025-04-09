@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Preview Invoice</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: 'Poppins', sans-serif; text-align: center; padding: 2em; }
+    iframe { width: 100%; height: 90vh; border: none; }
+    a.download-btn {
+      display: inline-block; margin-top: 1em;
+      padding: 10px 20px; background: #4CAF50; color: white;
+      text-decoration: none; border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Your Invoice is Ready</h2>
+  <iframe src="{{ pdf_url }}"></iframe>
+  <a href="{{ pdf_url }}" class="download-btn" download>Download PDF</a>
+</body>
+</html>
